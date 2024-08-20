@@ -24,6 +24,7 @@ namespace GestorDeTareas
             tarea.Titulo = Console.ReadLine();
             System.Console.Write("Descripcion: ");
             tarea.Descripcion = Console.ReadLine();
+            tarea.FechaCreacion = DateTime.UtcNow;
             Limpiar();
             NivelPrioridad();
             int opcion = Convert.ToInt32(Console.ReadLine());
@@ -65,11 +66,26 @@ namespace GestorDeTareas
 
         }
 
-        
+        public void QuitarTarea()
+        {
+            Limpiar();
+            System.Console.WriteLine("Cual tarea quieres eliminar? ");
+
+            VerTareas();
+
+            System.Console.WriteLine("Elige la tarea a eliminar: ");
+            int eliminado =Convert.ToInt32(Console.ReadLine());
+            eliminado = eliminado -1;
+
+            _gestorDeTareas.EliminarTarea(eliminado);
+
+            System.Console.WriteLine("Tarea borrada con exito!");
+            PresionaParaContinuar();
+        }
         public void VerTareas()
         {
+            Limpiar();
             _gestorDeTareas.MostrarTareas();
-            
             PresionaParaContinuar();
         }
 

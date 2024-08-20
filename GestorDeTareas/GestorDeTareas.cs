@@ -17,6 +17,10 @@ namespace GestorDeTareas
             _Tareas.Add(tarea);
         }
 
+        public void EliminarTarea(int eliminado)
+        {
+            _Tareas.RemoveAt(eliminado);
+        }
         private bool NoHayTareas()
         {
             if(_Tareas.Count == 0)
@@ -38,7 +42,6 @@ namespace GestorDeTareas
             }
 
             List<Tarea> tareas = new List<Tarea>(_Tareas);
-            tareas.Sort();
 
             System.Console.WriteLine(CadenaDeTareas(tareas));
 
@@ -47,13 +50,13 @@ namespace GestorDeTareas
         private string CadenaDeTareas(List<Tarea> tareas)
         {
             StringBuilder sb = new StringBuilder();
-
+            int i = 0;
             foreach (Tarea tarea in tareas)
             {
-                int i = 0;
                 if(_Tareas[0] == null) {continue;}
+                i ++;
+                string dato = string.Format("{0}. {1}\n",i,tarea);
 
-                string dato = string.Format("{0}. {1}",i+1,tarea);
                 sb.Append(dato);
             }
 

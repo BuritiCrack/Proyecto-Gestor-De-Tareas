@@ -1,0 +1,15 @@
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\bin\Debug\net8.0\GestorDeTareas.exe
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\bin\Debug\net8.0\GestorDeTareas.deps.json
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\bin\Debug\net8.0\GestorDeTareas.runtimeconfig.json
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\bin\Debug\net8.0\GestorDeTareas.dll
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\bin\Debug\net8.0\GestorDeTareas.pdb
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.GeneratedMSBuildEditorConfig.editorconfig
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.AssemblyInfoInputs.cache
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.AssemblyInfo.cs
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.csproj.CoreCompileInputs.cache
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.sourcelink.json
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.dll
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\refint\GestorDeTareas.dll
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.pdb
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\GestorDeTareas.genruntimeconfig.cache
+D:\jmbur\Documents\Visual Studio Proyects\Proyecto Gestor De Tareas\GestorDeTareas\obj\Debug\net8.0\ref\GestorDeTareas.dll

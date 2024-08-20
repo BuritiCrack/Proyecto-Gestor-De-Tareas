@@ -1,9 +1,13 @@
 ﻿namespace GestorDeTareas;
 
 class Program
-{
+{   
+    static ControlTarea con = new ControlTarea(new GestorDeTareas());
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        
+        con.AgregarTarea();
+        con.VerTareas();
+        
     }
 }

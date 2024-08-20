@@ -28,7 +28,7 @@ namespace GestorDeTareas
         {
             Titulo = titulo;
             Descripcion = descripcion;
-            FechaCreacion = DateTime.Now;
+            FechaCreacion = DateTime.UtcNow;
             Prioridad = NivelPrioridad.noAsignado;
             Estado = EstadoTarea.Pendiente;
         }
@@ -65,7 +65,7 @@ namespace GestorDeTareas
 
         public override string ToString()
         {
-            return string.Format("Titulo: {0}\nDescripcion: {1}\nFecha De Creacion: {2}\nPrioridad: {3}\nEstado: {4}",
+            return string.Format("Titulo: {0}\nDescripcion: {1}\nFecha De Creacion: {2}\nPrioridad: {3}\nEstado: {4}\n",
                                   Titulo,Descripcion,FechaCreacion,Prioridad,Estado);
         }
     }

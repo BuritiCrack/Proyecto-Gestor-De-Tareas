@@ -5,7 +5,7 @@ namespace GestorDeTareas;
 
 class Program
 {
-    static ControlTarea con = new ControlTarea(new GestorDeTareas());
+    static ControlTarea con = new(new GestorDeTareas());
     static void Main(string[] args)
     {
         string opcion = "";
@@ -15,7 +15,7 @@ class Program
             System.Console.WriteLine("Gestor de tareas");
             Imprimemenu();
             System.Console.Write("Seleccione una opcion: ");
-            opcion = Console.ReadLine();
+            opcion = Console.ReadLine() ?? String.Empty;
             switch (opcion)
             {
                 case "1":
@@ -26,6 +26,11 @@ class Program
                     break;
                 case "3":
                     con.QuitarTarea();
+                    break;
+                case "5":
+                    con.VerOrdenado();
+                    break;
+                case "6":
                     break;
                 default:
                     System.Console.WriteLine("Opcion no valida");
@@ -39,14 +44,14 @@ class Program
 
     public static void Imprimemenu()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
         sb.AppendLine("1. Crear Tarea");
         sb.AppendLine("2. Ver Tarea");
         sb.AppendLine("3. Eliminar Tarea");
         sb.AppendLine("4. Marcar Tarea");
         sb.AppendLine("5. Ordenar Tarea");
-        sb.AppendLine("6. Crear Tarea");
+        sb.AppendLine("6. Salir");
 
-        System.Console.WriteLine(sb.ToString());
+        System.Console.WriteLine(sb.ToString()); // tambien podria ser sb y no sb.ToString()
     }
 }

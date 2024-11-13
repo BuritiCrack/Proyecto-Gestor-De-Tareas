@@ -19,9 +19,11 @@ namespace GestorDeTareas
 
         public void EliminarTarea(int eliminado)
         {
+
             _Tareas.RemoveAt(eliminado);
         }
-        private bool NoHayTareas()
+
+        public bool NoHayTareas()
         {
             if(_Tareas.Count == 0)
             {
@@ -38,13 +40,33 @@ namespace GestorDeTareas
         {
             if(NoHayTareas())
             {
-                return;
+                return;  
             }
 
             List<Tarea> tareas = new List<Tarea>(_Tareas);
 
             System.Console.WriteLine(CadenaDeTareas(tareas));
 
+        }
+
+        public void OrdenarTareasPorPrioridadAscendente()
+        {
+            _Tareas.Sort(Tarea.PrioridadAscendenteComparer);
+        }
+
+        public void OrdenarTareasPorPrioridadDescendente()
+        {
+            _Tareas.Sort(Tarea.PrioridadDescendenteComparer);
+        }
+
+        public void OrdenarTareasPorFechaAscendente()
+        {
+            _Tareas.Sort(Tarea.FechaAscendenteComparer);
+        }
+
+        public void OrdenarTareasPorFechaDescendente()
+        {
+            _Tareas.Sort(Tarea.FechaDescendenteComparer);
         }
 
         private string CadenaDeTareas(List<Tarea> tareas)
@@ -61,8 +83,6 @@ namespace GestorDeTareas
             }
 
             return sb.ToString();
-        }
-
-        
+        }        
     }
 }

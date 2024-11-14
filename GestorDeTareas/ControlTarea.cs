@@ -18,7 +18,7 @@ namespace GestorDeTareas
             Limpiar();
             System.Console.WriteLine("Nueva Tarea");
 
-            Tarea tarea = new Tarea();
+            Tarea tarea = new();
 
             System.Console.Write("Titulo: ");
             tarea.Titulo = Console.ReadLine()!;
@@ -92,6 +92,44 @@ namespace GestorDeTareas
         {
             Limpiar();
             _gestorDeTareas.MostrarTareas();
+            PresionaParaContinuar();
+        }
+
+        public void MarcarTarea()
+        {
+            Limpiar();
+            if (NoHayTareas())
+            {
+                return;
+            }
+
+            System.Console.WriteLine("Cual tarea quieres marcar? ");
+
+            VerTareas();
+
+            System.Console.WriteLine("Elige la tarea a marcar: ");
+            int tarea = Convert.ToInt32(Console.ReadLine());
+            tarea -= 1; 
+
+            Limpiar();
+            Estado();
+            int op = Convert.ToInt32(Console.ReadLine());
+            switch (op)
+            {
+                case 1:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Pendiente);
+                    break;
+                case 2:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.enProgreso);
+                    break;
+                case 3:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Completada);
+                    break;
+                default:
+                    System.Console.WriteLine("Opcion no valida");
+                    break;
+            }
+            System.Console.WriteLine("Tarea marcada con exito!");
             PresionaParaContinuar();
         }
 

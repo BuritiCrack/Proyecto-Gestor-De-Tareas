@@ -1,12 +1,37 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Tareas</title>
+    <title>Proyecto Gestor De Tareas</title>
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-    <h1>Gestor de Tareas</h1>
+    <header>
+        <h1>Gestor De Tareas</h1>
+    </header>
+    <main>
+        <section id="task-list">
+            <h2>Lista de Tareas</h2>
+            <ul>
+                <!-- Las tareas se agregarán aquí -->
+            </ul>
+        </section>
+        <section id="task-form">
+            <h2>Agregar Nueva Tarea</h2>
+            <form>
+                <label for="task-name">Nombre de la Tarea:</label>
+                <input type="text" id="task-name" name="task-name" required>
+                <button type="submit">Agregar Tarea</button>
+            </form>
+        </section>
+        <section id="task-details">
+            <h2>Detalles de la Tarea</h2>
+            <p id="task-detail-name">Nombre: </p>
+            <p id="task-detail-date">Fecha de Vencimiento: </p>
+        </section>
+        <button id="clear-tasks">Borrar Todas las Tareas</button>
+    </main>
     <div id="menu">
         <button onclick="handleOption('1')">Agregar Tarea</button>
         <button onclick="handleOption('2')">Ver Tareas</button>
@@ -16,7 +41,10 @@
         <button onclick="handleOption('6')">Salir</button>
     </div>
     <div id="output"></div>
-
+    <footer>
+        <p>&copy; 2023 Proyecto Gestor De Tareas</p>
+    </footer>
+    <script src="script.js"></script>
     <script>
         function handleOption(option) {
             switch (option) {

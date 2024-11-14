@@ -49,6 +49,11 @@ namespace GestorDeTareas
 
         }
 
+        public void EditarEstadoTarea(int tarea, Tarea.EstadoTarea estado)
+        {
+            _Tareas[tarea].Estado = estado;
+        }
+
         public void OrdenarTareasPorPrioridadAscendente()
         {
             _Tareas.Sort(Tarea.PrioridadAscendenteComparer);

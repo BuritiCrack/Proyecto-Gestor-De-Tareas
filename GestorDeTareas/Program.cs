@@ -1,78 +1,60 @@
-﻿<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Tareas</title>
-</head>
-<body>
-    <h1>Gestor de Tareas</h1>
-    <div id="menu">
-        <button onclick="handleOption('1')">Agregar Tarea</button>
-        <button onclick="handleOption('2')">Ver Tareas</button>
-        <button onclick="handleOption('3')">Quitar Tarea</button>
-        <button onclick="handleOption('4')">Marcar Tarea</button>
-        <button onclick="handleOption('5')">Ver Ordenado</button>
-        <button onclick="handleOption('6')">Salir</button>
-    </div>
-    <div id="output"></div>
+﻿﻿using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
-    <script>
-        function handleOption(option) {
-            switch (option) {
-                case '1':
-                    agregarTarea();
+namespace GestorDeTareas;
+
+class Program
+{
+    static ControlTarea con = new(new GestorDeTareas());
+    static void Main(string[] args)
+    {
+        string opcion = "";
+        do
+        {
+            Console.Clear();
+            System.Console.WriteLine("Gestor de tareas");
+            Imprimemenu();
+            System.Console.Write("Seleccione una opcion: ");
+            opcion = Console.ReadLine() ?? String.Empty;
+            switch (opcion)
+            {
+                case "1":
+                    con.AgregarTarea();
                     break;
-                case '2':
-                    verTareas();
+                case "2":
+                    con.VerTareas();
                     break;
-                case '3':
-                    quitarTarea();
+                case "3":
+                    con.QuitarTarea();
                     break;
-                case '4':
-                    marcarTarea();
+                case "4":
+                    con.MarcarTarea();
                     break;
-                case '5':
-                    verOrdenado();
+                case "5":
+                    con.VerOrdenado();
                     break;
-                case '6':
-                    salir();
+                case "6":
                     break;
                 default:
-                    alert('Opción no válida');
+                    System.Console.WriteLine("Opcion no valida");
                     break;
             }
-        }
 
-        function agregarTarea() {
-            document.getElementById('output').innerText = 'Agregar Tarea';
-            // Lógica para agregar tarea
-        }
+        } while (opcion != "6");
 
-        function verTareas() {
-            document.getElementById('output').innerText = 'Ver Tareas';
-            // Lógica para ver tareas
-        }
 
-        function quitarTarea() {
-            document.getElementById('output').innerText = 'Quitar Tarea';
-            // Lógica para quitar tarea
-        }
+    }
 
-        function marcarTarea() {
-            document.getElementById('output').innerText = 'Marcar Tarea';
-            // Lógica para marcar tarea
-        }
+    public static void Imprimemenu()
+    {
+        StringBuilder sb = new();
+        sb.AppendLine("1. Crear Tarea");
+        sb.AppendLine("2. Ver Tarea");
+        sb.AppendLine("3. Eliminar Tarea");
+        sb.AppendLine("4. Marcar Tarea");
+        sb.AppendLine("5. Ordenar Tarea");
+        sb.AppendLine("6. Salir");
 
-        function verOrdenado() {
-            document.getElementById('output').innerText = 'Ver Ordenado';
-            // Lógica para ver tareas ordenadas
-        }
-
-        function salir() {
-            document.getElementById('output').innerText = 'Salir';
-            // Lógica para salir
-        }
-    </script>
-</body>
-</html>
+        System.Console.WriteLine(sb.ToString()); // tambien podria ser sb y no sb.ToString()
+    }
+}

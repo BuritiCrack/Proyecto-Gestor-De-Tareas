@@ -43,25 +43,7 @@ namespace GestorDeTareas
                     System.Console.WriteLine("Opcion no valida");
                     break;
             }
-            /*
-            Limpiar();
-            Estado();
-            int op = Convert.ToInt32(Console.ReadLine());
-            switch (op)
-            {
-                case 1:
-                    tarea.Estado = Tarea.EstadoTarea.Pendiente;
-                    break;
-                case 2:
-                    tarea.Estado = Tarea.EstadoTarea.enProgreso;
-                    break;
-                case 3:
-                    tarea.Estado = Tarea.EstadoTarea.Completada;
-                    break;
-                default:
-                    System.Console.WriteLine("Opcion no valida");
-                    break;
-            }*/
+            
             _gestorDeTareas.CrearTarea(tarea);
 
         }
@@ -136,8 +118,11 @@ namespace GestorDeTareas
         public void VerOrdenado()
         {
             Limpiar();
+            if (NoHayTareas())
+            {
+                return;
+            }
             int opcion;
-
             do
             {
                 Limpiar();

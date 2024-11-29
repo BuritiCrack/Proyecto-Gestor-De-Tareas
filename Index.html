@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestor de Tareas</h1>
+        <div class="menu">
+            <button id="crearTarea">Crear Tarea</button>
+            <button id="verTareas">Ver Tareas</button>
+            <button id="eliminarTarea">Eliminar Tarea</button>
+            <button id="ordenarTareas">Ordenar Tareas</button>
+        </div>
+        <div id="output" class="output"></div>
+    </div>
+    <script>
+        // JavaScript para interactuar con la API
+        const outputDiv = document.getElementById('output');
+
+        document.getElementById('crearTarea').addEventListener('click', () => {
+            fetch('/api/tareas', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.innerHTML = `Tarea creada: ${JSON.stringify(data)}`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('verTareas').addEventListener('click', () => {
+            fetch('/api/tareas')
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('eliminarTarea').addEventListener('click', () => {
+            fetch('/api/tareas', {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.innerHTML = `Tarea eliminada: ${JSON.stringify(data)}`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('ordenarTareas').addEventListener('click', () => {
+            fetch('/api/tareas/ordenar')
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.innerHTML = `Tareas ordenadas: ${JSON.stringify(data)}`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

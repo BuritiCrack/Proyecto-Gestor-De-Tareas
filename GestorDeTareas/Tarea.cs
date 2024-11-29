@@ -1,3 +1,4 @@
+using System.Text.Json;
 namespace GestorDeTareas
 {
     class Tarea : IComparable<Tarea>

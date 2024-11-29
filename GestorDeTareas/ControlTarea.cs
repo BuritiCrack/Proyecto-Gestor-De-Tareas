@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using System.Text;
+using System.IO;
+using System.Text.Json;
 
 namespace GestorDeTareas
 {
@@ -45,7 +47,6 @@ namespace GestorDeTareas
             }
             
             _gestorDeTareas.CrearTarea(tarea);
-
         }
 
         public void QuitarTarea()
@@ -192,6 +193,15 @@ namespace GestorDeTareas
             System.Console.WriteLine(sb.ToString());
         }
 
+        public void GuardarTareas(string archivo)
+        {
+            _gestorDeTareas.GuardarTareas(archivo);
+        }
+
+        public void CargarTareas(string archivo)
+        {
+            _gestorDeTareas.CargarTareas(archivo);
+        }
         public bool NoHayTareas()
         {
             if(_gestorDeTareas.NoHayTareas())

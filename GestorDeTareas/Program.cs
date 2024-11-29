@@ -1,13 +1,16 @@
 ﻿﻿using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 
 namespace GestorDeTareas;
 
 class Program
 {
     static ControlTarea con = new(new GestorDeTareas());
+    static string archivo = "tareas.json";
     static void Main(string[] args)
     {
+        con.CargarTareas(archivo);
         string opcion = "";
         do
         {
@@ -42,6 +45,7 @@ class Program
 
         } while (opcion != "6");
 
+        con.GuardarTareas(archivo);
 
     }
 

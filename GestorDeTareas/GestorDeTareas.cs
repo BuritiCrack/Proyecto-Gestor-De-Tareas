@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json;
 
 namespace GestorDeTareas
 {
@@ -47,6 +48,21 @@ namespace GestorDeTareas
 
             System.Console.WriteLine(CadenaDeTareas(tareas));
 
+        }
+
+        public void GuardarTareas(string archivo)
+        {
+            string json = JsonSerializer.Serialize(_Tareas);
+            File.WriteAllText(archivo, json);
+        }
+
+        public void CargarTareas(string archivo)
+        {
+            if (File.Exists(archivo))
+            {
+                string json = File.ReadAllText(archivo);
+                _Tareas = JsonSerializer.Deserialize<List<Tarea>>(json) ?? new List<Tarea>();
+            }
         }
 
         public void EditarEstadoTarea(int tarea, Tarea.EstadoTarea estado)

@@ -18,35 +18,72 @@ namespace GestorDeTareas
         public void AgregarTarea()
         {
             Limpiar();
-            System.Console.WriteLine("Nueva Tarea");
-
-            Tarea tarea = new();
-
-            System.Console.Write("Titulo: ");
-            tarea.Titulo = Console.ReadLine()!;
-            System.Console.Write("Descripcion: ");
-            tarea.Descripcion = Console.ReadLine()!;
-            tarea.FechaCreacion = DateTime.UtcNow;
-            Limpiar();
-            NivelPrioridad();
-            int opcion = Convert.ToInt32(Console.ReadLine());
-            switch (opcion)
+            do
             {
-                case 1:
-                    tarea.Prioridad = Tarea.NivelPrioridad.baja;
+
+                try
+                {
+
+                    System.Console.WriteLine("Nueva Tarea");
+
+                    Tarea tarea = new();
+
+                    System.Console.Write("Titulo: ");
+                    tarea.Titulo = Console.ReadLine()!;
+                    System.Console.Write("Descripcion: ");
+                    tarea.Descripcion = Console.ReadLine()!;
+                    tarea.FechaCreacion = DateTime.UtcNow;
+                    Limpiar();
+                    NivelPrioridad();
+                    int opcion;
+                    while (true)
+                    {
+                        try
+                        {
+                            opcion = Convert.ToInt32(Console.ReadLine());
+                            if (opcion < 1 || opcion > 3)
+                            {
+                                throw new ArgumentOutOfRangeException();
+                            }
+                            break;
+                        }
+                        catch (FormatException)
+                        {
+                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
+                        }
+                    }
+                    switch (opcion)
+                    {
+                        case 1:
+                            tarea.Prioridad = Tarea.NivelPrioridad.baja;
+                            break;
+                        case 2:
+                            tarea.Prioridad = Tarea.NivelPrioridad.media;
+                            break;
+                        case 3:
+                            tarea.Prioridad = Tarea.NivelPrioridad.alta;
+                            break;
+                    }
+
+                    _gestorDeTareas.CrearTarea(tarea);
+                    Console.WriteLine("Tarea creada con exito!");
                     break;
-                case 2:
-                    tarea.Prioridad = Tarea.NivelPrioridad.media;
-                    break;
-                case 3:
-                    tarea.Prioridad = Tarea.NivelPrioridad.alta;
-                    break;
-                default:
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("\n", e.Message);
                     System.Console.WriteLine("Opcion no valida");
-                    break;
-            }
-            
-            _gestorDeTareas.CrearTarea(tarea);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine("\n", e.Message);
+                    System.Console.WriteLine("Prioridad no valida");
+                }
+            } while (true);
         }
 
         public void QuitarTarea()
@@ -57,19 +94,42 @@ namespace GestorDeTareas
             {
                 return;
             }
+                System.Console.WriteLine("Cual tarea quieres eliminar? ");
 
-            System.Console.WriteLine("Cual tarea quieres eliminar? ");
+                VerTareas();
 
-            VerTareas();
+                System.Console.Write("Elige la tarea a eliminar: ");
+                int eliminado = Convert.ToInt32(Console.ReadLine());
+                while (true)
+                {
+                    try
+                    {
+                        if (eliminado < 1 || eliminado > _gestorDeTareas.tamañoLista())
+                        {
+                            throw new ArgumentOutOfRangeException();
+                        }
+                        break;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Console.WriteLine("\n", e.Message);
+                        System.Console.WriteLine("Ingrese un numero entre 1 y " + _gestorDeTareas.tamañoLista());
+                        eliminado = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine("\n", e.Message);
+                        System.Console.WriteLine("Opcion no valida");
+                        eliminado = Convert.ToInt32(Console.ReadLine());
+                    }
 
-            System.Console.WriteLine("Elige la tarea a eliminar: ");
-            int eliminado = Convert.ToInt32(Console.ReadLine());
-            eliminado -= 1;
+                }
+                eliminado -= 1;
 
-            _gestorDeTareas.EliminarTarea(eliminado);
+                _gestorDeTareas.EliminarTarea(eliminado);
 
-            System.Console.WriteLine("Tarea borrada con exito!");
-            PresionaParaContinuar();
+                System.Console.WriteLine("Tarea borrada con exito!");
+                PresionaParaContinuar();
         }
         public void VerTareas()
         {
@@ -92,7 +152,7 @@ namespace GestorDeTareas
 
             System.Console.WriteLine("Elige la tarea a marcar: ");
             int tarea = Convert.ToInt32(Console.ReadLine());
-            tarea -= 1; 
+            tarea -= 1;
 
             Limpiar();
             Estado();
@@ -170,15 +230,16 @@ namespace GestorDeTareas
         }
         public void NivelPrioridad()
         {
-            StringBuilder builder = new();
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.AppendLine("Seleccione el nivel de prioridad:");
+                builder.AppendLine("1. Baja");
+                builder.AppendLine("2. Media");
+                builder.AppendLine("3. Alta");
+                builder.Append("Seleccione una opcion: ");
 
-            builder.AppendLine("Seleccione el nivel de prioridad:");
-            builder.AppendLine("1. Baja");
-            builder.AppendLine("2. Media");
-            builder.AppendLine("3. Alta");
-            builder.Append("Seleccione una opcion: ");
-
-            System.Console.Write(builder);
+                System.Console.Write(builder.ToString());
+            }
         }
 
         public void Estado()
@@ -204,7 +265,7 @@ namespace GestorDeTareas
         }
         public bool NoHayTareas()
         {
-            if(_gestorDeTareas.NoHayTareas())
+            if (_gestorDeTareas.NoHayTareas())
             {
                 PresionaParaContinuar();
                 return true;

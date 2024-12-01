@@ -50,6 +50,11 @@ namespace GestorDeTareas
 
         }
 
+        public int tamañoLista()
+        {
+            return _Tareas.Count;
+        }
+
         public void GuardarTareas(string archivo)
         {
             string json = JsonSerializer.Serialize(_Tareas);

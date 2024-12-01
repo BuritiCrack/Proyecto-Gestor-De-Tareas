@@ -11,10 +11,10 @@ namespace GestorDeTareas
 
         public enum NivelPrioridad
         {
-            noAsignado = 0,
-            baja = 1,
-            media = 2,
-            alta = 3
+            
+            baja,
+            media,
+            alta
         }
 
         public enum EstadoTarea
@@ -29,16 +29,16 @@ namespace GestorDeTareas
             Titulo = "";
             Descripcion = "";
             FechaCreacion = DateTime.UtcNow;
-            Prioridad = NivelPrioridad.noAsignado;
+            //Prioridad = NivelPrioridad;
             Estado = EstadoTarea.Pendiente;
 
         }
-        public Tarea(string titulo, string descripcion, DateTime fechaDeCreacion)
+        public Tarea(string titulo, string descripcion, DateTime fechaDeCreacion,NivelPrioridad prioridad)
         {
             Titulo = titulo;
             Descripcion = descripcion;
             FechaCreacion = fechaDeCreacion;
-            Prioridad = NivelPrioridad.noAsignado;
+            Prioridad = prioridad;
             Estado = EstadoTarea.Pendiente;
         }
 

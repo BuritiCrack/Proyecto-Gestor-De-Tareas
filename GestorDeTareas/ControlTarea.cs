@@ -20,7 +20,6 @@ namespace GestorDeTareas
             Limpiar();
             do
             {
-
                 try
                 {
 
@@ -78,59 +77,54 @@ namespace GestorDeTareas
                     Console.WriteLine("\n", e.Message);
                     System.Console.WriteLine("Opcion no valida");
                 }
-                catch (ArgumentOutOfRangeException e)
-                {
-                    Console.WriteLine("\n", e.Message);
-                    System.Console.WriteLine("Prioridad no valida");
-                }
             } while (true);
         }
-
         public void QuitarTarea()
         {
-
             Limpiar();
+
             if (NoHayTareas())
             {
                 return;
             }
-                System.Console.WriteLine("Cual tarea quieres eliminar? ");
 
-                VerTareas();
+            VerTareas();
+            int eliminado = SolicitarIndiceValido();
 
-                System.Console.Write("Elige la tarea a eliminar: ");
-                int eliminado = Convert.ToInt32(Console.ReadLine());
-                while (true)
-                {
-                    try
-                    {
-                        if (eliminado < 1 || eliminado > _gestorDeTareas.tamañoLista())
-                        {
-                            throw new ArgumentOutOfRangeException();
-                        }
-                        break;
-                    }
-                    catch (ArgumentOutOfRangeException e)
-                    {
-                        Console.WriteLine("\n", e.Message);
-                        System.Console.WriteLine("Ingrese un numero entre 1 y " + _gestorDeTareas.tamañoLista());
-                        eliminado = Convert.ToInt32(Console.ReadLine());
-                    }
-                    catch (FormatException e)
-                    {
-                        Console.WriteLine("\n", e.Message);
-                        System.Console.WriteLine("Opcion no valida");
-                        eliminado = Convert.ToInt32(Console.ReadLine());
-                    }
+            _gestorDeTareas.EliminarTarea(eliminado - 1);
 
-                }
-                eliminado -= 1;
-
-                _gestorDeTareas.EliminarTarea(eliminado);
-
-                System.Console.WriteLine("Tarea borrada con exito!");
-                PresionaParaContinuar();
+            Console.WriteLine("Tarea borrada con éxito!");
+            PresionaParaContinuar();
         }
+
+        private int SolicitarIndiceValido()
+        {
+            while (true)
+            {
+                Console.Write("Elige la tarea: ");
+
+                try
+                {
+                    int indice = Convert.ToInt32(Console.ReadLine());
+
+                    if (indice < 1 || indice > _gestorDeTareas.tamañoLista())
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
+
+                    return indice;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Opción no válida. Ingrese un número.");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine($"Ingrese un número entre 1 y {_gestorDeTareas.tamañoLista()}");
+                }
+            }
+        }
+
         public void VerTareas()
         {
             Limpiar();
@@ -145,35 +139,62 @@ namespace GestorDeTareas
             {
                 return;
             }
-
-            System.Console.WriteLine("Cual tarea quieres marcar? ");
-
-            VerTareas();
-
-            System.Console.WriteLine("Elige la tarea a marcar: ");
-            int tarea = Convert.ToInt32(Console.ReadLine());
-            tarea -= 1;
-
-            Limpiar();
-            Estado();
-            int op = Convert.ToInt32(Console.ReadLine());
-            switch (op)
+            do
             {
-                case 1:
-                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Pendiente);
-                    break;
-                case 2:
-                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.enProgreso);
-                    break;
-                case 3:
-                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Completada);
-                    break;
-                default:
-                    System.Console.WriteLine("Opcion no valida");
-                    break;
-            }
-            System.Console.WriteLine("Tarea marcada con exito!");
-            PresionaParaContinuar();
+                try
+                {
+                    System.Console.WriteLine("Cual tarea quieres marcar? ");
+
+                    VerTareas();
+                    int tarea = SolicitarIndiceValido();
+                    tarea -= 1;
+
+                    Limpiar();
+                    Estado();
+                    int op = Convert.ToInt32(Console.ReadLine());
+                    while (true)
+                    {
+                        try
+                        {
+                            if (op < 1 || op > 3)
+                            {
+                                throw new ArgumentOutOfRangeException();
+                            }
+                            break;
+                        }
+                        catch (FormatException)
+                        {
+                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
+                        }
+                    }
+
+                    switch (op)
+                    {
+                        case 1:
+                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Pendiente);
+                            break;
+                        case 2:
+                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.enProgreso);
+                            break;
+                        case 3:
+                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Completada);
+                            break;
+                        default:
+                            System.Console.WriteLine("Opcion no valida");
+                            break;
+                    }
+                    System.Console.WriteLine("Tarea marcada con exito!");
+                    PresionaParaContinuar();
+                }
+                catch (FormatException)
+                {
+                    System.Console.WriteLine("Digite un numero");
+                }
+            } while (true);
         }
 
         public void VerOrdenado()
@@ -226,7 +247,7 @@ namespace GestorDeTareas
             sb.AppendLine("5. Salir");
             sb.Append("Selecciona una opcion: ");
 
-            System.Console.WriteLine(sb.ToString());
+            System.Console.Write(sb.ToString());
         }
         public void NivelPrioridad()
         {
@@ -250,8 +271,9 @@ namespace GestorDeTareas
             sb.AppendLine("1. Pendiente");
             sb.AppendLine("2. En Progreso");
             sb.AppendLine("3. Completada");
+            sb.Append("Seleccione una opcion: ");
 
-            System.Console.WriteLine(sb.ToString());
+            System.Console.Write(sb.ToString());
         }
 
         public void GuardarTareas(string archivo)

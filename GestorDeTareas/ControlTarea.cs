@@ -37,6 +37,8 @@ namespace GestorDeTareas
                     int opcion;
                     while (true)
                     {
+                        Console.Write("Seleccione una opcion: ");
+
                         try
                         {
                             opcion = Convert.ToInt32(Console.ReadLine());
@@ -139,62 +141,59 @@ namespace GestorDeTareas
             {
                 return;
             }
-            do
+
+            System.Console.WriteLine("Cual tarea quieres marcar? ");
+
+            VerTareas();
+            int tarea = SolicitarIndiceValido();
+            tarea -= 1;
+
+            Limpiar();
+            Estado();
+            int op;
+            while (true)
             {
+                Console.Write("Elige una opcion: ");
+
                 try
                 {
-                    System.Console.WriteLine("Cual tarea quieres marcar? ");
-
-                    VerTareas();
-                    int tarea = SolicitarIndiceValido();
-                    tarea -= 1;
-
-                    Limpiar();
-                    Estado();
-                    int op = Convert.ToInt32(Console.ReadLine());
-                    while (true)
+                    op = Convert.ToInt32(Console.ReadLine());
+                    if (op < 1 || op > 4)
                     {
-                        try
-                        {
-                            if (op < 1 || op > 3)
-                            {
-                                throw new ArgumentOutOfRangeException();
-                            }
-                            break;
-                        }
-                        catch (FormatException)
-                        {
-                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
-                        }
-                        catch (ArgumentOutOfRangeException)
-                        {
-                            System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 3.");
-                        }
+                        throw new ArgumentOutOfRangeException();
                     }
-
-                    switch (op)
-                    {
-                        case 1:
-                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Pendiente);
-                            break;
-                        case 2:
-                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.enProgreso);
-                            break;
-                        case 3:
-                            _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Completada);
-                            break;
-                        default:
-                            System.Console.WriteLine("Opcion no valida");
-                            break;
-                    }
-                    System.Console.WriteLine("Tarea marcada con exito!");
-                    PresionaParaContinuar();
+                    break;
                 }
                 catch (FormatException)
                 {
-                    System.Console.WriteLine("Digite un numero");
+                    System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 4.");
                 }
-            } while (true);
+                catch (ArgumentOutOfRangeException)
+                {
+                    System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 4.");
+                }
+            }
+            switch (op)
+            {
+
+                case 1:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Pendiente);
+                    break;
+                case 2:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.enProgreso);
+                    break;
+                case 3:
+                    _gestorDeTareas.EditarEstadoTarea(tarea, Tarea.EstadoTarea.Completada);
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.Console.WriteLine("Opcion no valida");
+                    break;
+            }
+
+            System.Console.WriteLine("Tarea marcada con exito!");
+
         }
 
         public void VerOrdenado()
@@ -204,13 +203,34 @@ namespace GestorDeTareas
             {
                 return;
             }
+
             int opcion;
             do
             {
-                Limpiar();
                 _gestorDeTareas.MostrarTareas();
                 MenuOrdenamiento();
-                opcion = Convert.ToInt32(Console.ReadLine());
+
+                while (true)
+                {
+                    Console.WriteLine("Seleccione una opcion: ");
+                    try
+                    {
+                        opcion = Convert.ToInt32(Console.ReadLine());
+                        if (opcion < 1 || opcion > 5)
+                        {
+                            throw new ArgumentOutOfRangeException();
+                        }
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        System.Console.WriteLine("Opcion no valida.");
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        System.Console.WriteLine("Opcion no valida. Por favor, ingrese un numero entre 1 y 5.");
+                    }
+                }
                 switch (opcion)
                 {
                     case 1:
@@ -231,7 +251,6 @@ namespace GestorDeTareas
                         System.Console.WriteLine("Opcion no valida");
                         break;
                 }
-                //PresionaParaContinuar();
             } while (opcion != 5);
 
         }
@@ -245,7 +264,6 @@ namespace GestorDeTareas
             sb.AppendLine("3. Por fecha ascendente");
             sb.AppendLine("4. Por fecha descendente");
             sb.AppendLine("5. Salir");
-            sb.Append("Selecciona una opcion: ");
 
             System.Console.Write(sb.ToString());
         }
@@ -271,6 +289,7 @@ namespace GestorDeTareas
             sb.AppendLine("1. Pendiente");
             sb.AppendLine("2. En Progreso");
             sb.AppendLine("3. Completada");
+            sb.AppendLine("4. Salir");
             sb.Append("Seleccione una opcion: ");
 
             System.Console.Write(sb.ToString());

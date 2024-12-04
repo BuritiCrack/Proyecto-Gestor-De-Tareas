@@ -11,39 +11,59 @@ class Program
     static void Main(string[] args)
     {
         con.CargarTareas(archivo);
-        string opcion = "";
+        int opcion;
         do
         {
             Console.Clear();
             System.Console.WriteLine("Gestor de tareas");
             Imprimemenu();
-            System.Console.Write("Seleccione una opcion: ");
-            opcion = Console.ReadLine() ?? String.Empty;
+            while (true)
+            {
+                Console.Write("Ingrese una opcion:");
+
+                try
+                {
+                    opcion = Convert.ToInt32(Console.ReadLine());
+                    if (opcion < 1 || opcion > 6)
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                }
+                catch (FormatException)
+                {
+                    System.Console.WriteLine("Fromato no valido");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    System.Console.WriteLine("Ingrese un numero entre 1 y 6");
+                }
+            }
             switch (opcion)
             {
-                case "1":
+                case 1:
                     con.AgregarTarea();
                     break;
-                case "2":
+                case 2:
                     con.VerTareas();
                     break;
-                case "3":
+                case 3:
                     con.QuitarTarea();
                     break;
-                case "4":
+                case 4:
                     con.MarcarTarea();
                     break;
-                case "5":
+                case 5:
                     con.VerOrdenado();
                     break;
-                case "6":
+                case 6:
                     break;
                 default:
                     System.Console.WriteLine("Opcion no valida");
                     break;
             }
 
-        } while (opcion != "6");
+        } while (opcion != 6);
 
         con.GuardarTareas(archivo);
 

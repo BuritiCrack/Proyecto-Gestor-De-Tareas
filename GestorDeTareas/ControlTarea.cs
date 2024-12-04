@@ -212,7 +212,7 @@ namespace GestorDeTareas
 
                 while (true)
                 {
-                    Console.WriteLine("Seleccione una opcion: ");
+                    Console.Write("Seleccione una opcion: ");
                     try
                     {
                         opcion = Convert.ToInt32(Console.ReadLine());
